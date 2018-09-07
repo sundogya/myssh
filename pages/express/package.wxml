@@ -1,0 +1,108 @@
+<!--pages/express/package.wxml-->
+<view class='container'>
+  <view class='comCode'>
+    <view class='selected'>{{sender.comDetail.name}}</view>
+  </view>
+  <view class='comCodes'>
+    <scroll-view scroll-y class='code_scroll' bindscrolltolower='getMoreCodes'>
+      <block wx:for='{{comCodes}}' wx:for-item='codes' wx:key='key'>
+        <block wx:for='{{codes}}' wx:for-item='com' wx:key='key'>
+          <view data-name='{{com.comName}}' data-code='{{com.comCode}}' bindtap='choseCom'>{{com.comName}}</view>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+  <view class='sender'>
+    <input placeholder='寄件人姓名'></input>
+    <input placeholder='寄件人联系电话'></input>
+    <view class='cityOut sender'>
+      <view class='selected' bindtap='changeShow' data-level='province' data-role='send'>{{sender.city.province}}</view>
+      <view class='selected' bindtap='changeShow' data-level='city' data-role='send' data-code='{{sender.cityCode.province}}'>{{sender.city.city}}</view>
+      <view class='selected' bindtap='changeShow' data-level='area' data-role='send' data-code='{{sender.cityCode.city}}'>{{sender.city.area}}</view>
+      <view class='province send'>
+        <block wx:if='{{sender.show.province}}'>
+          <view class='select'>
+            <block wx:for='{{city.province}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='province' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class='city send'>
+        <block wx:if='{{sender.show.city}}'>
+          <view class='select'>
+            <block wx:for='{{city.city}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='city' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class='area send'>
+
+        <block wx:if='{{sender.show.area}}'>
+          <view class='select'>
+            <block wx:for='{{city.area}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='area' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+    <input placeholder='寄件人详细地址'></input>
+  </view>
+  <view class='receiver'>
+    <input placeholder='收件人姓名'></input>
+    <input placeholder='收件人联系电话'></input>
+    <view class='cityOut receiver'>
+      <view class='selected' bindtap='changeShow' data-level='province' data-role='receive'>{{receiver.city.province}}</view>
+      <view class='selected' bindtap='changeShow' data-level='city' data-role='receive' data-code='{{receiver.cityCode.province}}'>{{receiver.city.city}}</view>
+      <view class='selected' bindtap='changeShow' data-level='area' data-role='receive' data-code='{{receiver.cityCode.city}}'>{{receiver.city.area}}</view>
+      <view class='province send'>
+        <block wx:if='{{receiver.show.province}}'>
+          <view class='select'>
+            <block wx:for='{{city.province}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='province' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class='city send'>
+        <block wx:if='{{receiver.show.city}}'>
+          <view class='select'>
+            <block wx:for='{{city.city}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='city' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+      <view class='area send'>
+        <block wx:if='{{receiver.show.area}}'>
+          <view class='select'>
+            <block wx:for='{{city.area}}' wx:key='key'>
+              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='area' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+    <input placeholder='收件人详细地址'></input>
+  </view>
+  <view class='attach'>
+    <block wx:for='{{goods}}' wx:for-index='indx' wx:key='key' wx:for-item='item'>
+      <view class='goods'>
+        <view class='name'>
+          <input name='GoodsName' placeholder='物品名称' data-index='{{indx}}' bindinput='fillGoods'></input>
+        </view>
+        <view class='weight'>
+          <input name='GoodsWeight' placeholder='物品重量' data-index='{{indx}}'></input>
+        </view>
+        <view class='number'>
+          <input name='Goodsquantity' placeholder='物品数量' data-index='{{indx}}'></input>
+        </view>
+        <block wx:if='{{item}}'>
+          <view class='add' bindtap='addGoods'>添加</view>
+        </block>
+      </view>
+    </block>
+  </view>
+</view>

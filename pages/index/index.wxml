@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<view class='container'>
+  <view class='getInfo'>
+    <view class='comCode' bindtap='getComs'>
+      <view class='code' data-code='{{comCode}}'>{{comName}}</view>
+    </view>
+    <view class='expressNum'>
+      <input placeholder='输入物流单号' class='number' bindconfirm='getExpress' value='{{originNum}}' bindinput='getNumber' confirm-type='查询'></input>
+      <image src='{{picHost}}/scan.png' bindtap='scanCode'></image>
+    </view>
+    <block wx:if='{{flag}}'>
+      <view class='select'>
+        <scroll-view scroll-y class='code_scroll' bindscrolltolower='getMoreCodes'>
+          <block wx:for='{{comCodes}}' wx:key='key' wx:for-item='coms'>
+            <block wx:for='{{coms}}' wx:key='key' wx:for-item='item'>
+              <view class='codes' data-name='{{item.comName}}' data-code='{{item.comCode}}' catchtap='selectCode'>{{item.comName}}</view>
+            </block>
+          </block>
+        </scroll-view>
+      </view>
+    </block>
+  </view>
+  
+  <view class='tracess'>
+    <block wx:if='traces.length'>
+      <block wx:for='{{traces}}' wx:key='key' wx:for-item='trace'>
+        <view class='trace_info'>
+          <view class='event'>
+            <text>{{trace.AcceptStation}}</text>
+          </view>
+          <view class='time'>
+            <text>---------{{trace.AcceptTime}}---------</text>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <view class='expressPackage' bindtap='toExpress'>
+    我要寄快递
+  </view>
+</view>
