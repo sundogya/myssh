@@ -14,8 +14,31 @@ view{
   flex-wrap:wrap;
 }
 input{
-  width:100;
+  width:375rpx;
   display:flex;
+  text-align:center;
+  box-sizing:border-box;
+  padding:0 10rpx;
+  margin:10rpx 0;
+  font-size:28rpx;
+  border-right:1rpx solid #bbb;
+}
+.no-border{
+  border:none;
+}
+.detail{
+  width:750rpx;
+}
+.quarter{
+  width:187.5rpx;
+  display:flex;
+  font-size:28rpx;
+  justify-content:center;
+  align-items:center;
+  border:none;
+}
+.quarter input{
+  border:none;
 }
 .cityOut{
   width:100%;
@@ -48,4 +71,7 @@ input{
   height:60rpx;
   color:white;
   align-items:center;
+}
+.goods{
+  width:100%;
 }

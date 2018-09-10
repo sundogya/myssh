@@ -1,20 +1,23 @@
 <!--pages/express/package.wxml-->
 <view class='container'>
-  <view class='comCode'>
-    <view class='selected'>{{sender.comDetail.name}}</view>
-  </view>
-  <view class='comCodes'>
-    <scroll-view scroll-y class='code_scroll' bindscrolltolower='getMoreCodes'>
-      <block wx:for='{{comCodes}}' wx:for-item='codes' wx:key='key'>
-        <block wx:for='{{codes}}' wx:for-item='com' wx:key='key'>
-          <view data-name='{{com.comName}}' data-code='{{com.comCode}}' bindtap='choseCom'>{{com.comName}}</view>
+  <view class='comChose'>
+    <view class='desc'>请选择物流公司</view>
+    <view class='comCode'>
+      <view class='selected'>{{sender.comDetail.name}}</view>
+    </view>
+    <view class='comCodes'>
+      <scroll-view scroll-y class='code_scroll' bindscrolltolower='getMoreCodes'>
+        <block wx:for='{{comCodes}}' wx:for-item='codes' wx:key='key'>
+          <block wx:for='{{codes}}' wx:for-item='com' wx:key='key'>
+            <view data-name='{{com.comName}}' data-code='{{com.comCode}}' bindtap='choseCom'>{{com.comName}}</view>
+          </block>
         </block>
-      </block>
-    </scroll-view>
+      </scroll-view>
+    </view>
   </view>
   <view class='sender'>
     <input placeholder='寄件人姓名'></input>
-    <input placeholder='寄件人联系电话'></input>
+    <input placeholder='寄件人联系电话' class='no-border'></input>
     <view class='cityOut sender'>
       <view class='selected' bindtap='changeShow' data-level='province' data-role='send'>{{sender.city.province}}</view>
       <view class='selected' bindtap='changeShow' data-level='city' data-role='send' data-code='{{sender.cityCode.province}}'>{{sender.city.city}}</view>
@@ -48,11 +51,11 @@
         </block>
       </view>
     </view>
-    <input placeholder='寄件人详细地址'></input>
+    <input placeholder='寄件人详细地址' class='no-border detail'></input>
   </view>
   <view class='receiver'>
     <input placeholder='收件人姓名'></input>
-    <input placeholder='收件人联系电话'></input>
+    <input placeholder='收件人联系电话' class='no-border'></input>
     <view class='cityOut receiver'>
       <view class='selected' bindtap='changeShow' data-level='province' data-role='receive'>{{receiver.city.province}}</view>
       <view class='selected' bindtap='changeShow' data-level='city' data-role='receive' data-code='{{receiver.cityCode.province}}'>{{receiver.city.city}}</view>
@@ -85,24 +88,27 @@
         </block>
       </view>
     </view>
-    <input placeholder='收件人详细地址'></input>
+    <input placeholder='收件人详细地址' class='no-border detail'></input>
   </view>
   <view class='attach'>
     <block wx:for='{{goods}}' wx:for-index='indx' wx:key='key' wx:for-item='item'>
       <view class='goods'>
-        <view class='name'>
+        <view class='name' class='quarter'>
           <input name='GoodsName' placeholder='物品名称' data-index='{{indx}}' bindinput='fillGoods'></input>
         </view>
-        <view class='weight'>
+        <view class='weight' class='quarter'>
           <input name='GoodsWeight' placeholder='物品重量' data-index='{{indx}}'></input>
         </view>
-        <view class='number'>
+        <view class='number' class='quarter'>
           <input name='Goodsquantity' placeholder='物品数量' data-index='{{indx}}'></input>
         </view>
         <block wx:if='{{item}}'>
-          <view class='add' bindtap='addGoods'>添加</view>
+          <view class='add' bindtap='addGoods' class='quarter'>添加</view>
         </block>
       </view>
     </block>
+  </view>
+  <view class='express'>
+    <text class='submit' bindtap='expressSub'>我要寄件</text>
   </view>
 </view>
