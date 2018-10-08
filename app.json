@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/express/package"
+    "pages/express/package",
+    "pages/express/address"
   ],
   "window": {
     "backgroundTextStyle": "light",
