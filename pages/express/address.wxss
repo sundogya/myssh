@@ -4,22 +4,24 @@
   float: left;
   width: 40%;
   border-right: 1px solid #eee;
-  height: 24px;
-  line-height: 24px;
+  height: 48rpx;
+  line-height: 48rpx;
 }
 
 .senderTel {
   float: left;
   width: 50%;
-  height: 24px;
-  line-height: 24px;
+  height: 48rpx;
+  line-height: 48rpx;
 }
 
 .sendBox1 {
-  position:relative;
+  height: 80rpx;
+  position: relative;
   overflow: hidden;
-  padding: 10px 15px;
+  padding: 0 20rpx;
   border-top: 1px solid #eee;
+  align-items: center;
 }
 
 .senderName input {
@@ -31,7 +33,7 @@
 .senderTel input {
   font-size: 0.8rem;
   color: #333;
-  padding-left: 20px;
+  padding-left: 40rpx;
 }
 
 .sendLine {
@@ -41,31 +43,36 @@
 }
 
 .sendBox2 {
-  position:relative;
+  position: relative;
   font-size: 0.8rem;
   color: #333;
-  padding: 10px 15px;
+  padding: 0 30rpx;
+  height: 80rpx;
+  align-items: center;
 }
 
 .sendBox3 {
-  padding: 10px 15px;
+  height:80rpx;
+  padding: 0 30rpx;
+  align-items:center;
 }
 
 .sendBox3 input {
-  width:100%;
+  
+  width: 100%;
   font-size: 0.8rem;
   color: #333;
 }
 
 .sendBtn {
   width: 90%;
-  border-radius: 5px;
+  border-radius: 10rpx;
   background: #666;
-  height: 40px;
-  line-height: 40px;
+  height: 80rpx;
+  line-height: 80rpx;
   color: #fff;
   position: fixed;
-  bottom: 10px;
+  bottom: 20rpx;
   left: 5%;
   font-size: 0.9rem;
   justify-content: center;
@@ -76,18 +83,21 @@
 }
 
 /**/
-.icon{
-  width:80rpx;
-  height:80rpx;
-  padding:15rpx;
-  position:absolute;
-  right:0;
-  top:0;
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+  padding: 15rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
-.icon image{
-  width:50rpx;
-  height:50rpx;
+
+.icon image {
+  width: 50rpx;
+  height: 50rpx;
 }
+
 .send {
   position: absolute;
   z-index: 999;

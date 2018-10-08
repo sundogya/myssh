@@ -3,9 +3,10 @@
     <input name='name' placeholder='姓名' data-info='user' data-detail='name' bindinput='getInfo' value='{{user.name}}'></input>
   </view>
   <view class='senderTel'>
-    <view class='icon' bindtap='getAddress'><image src='{{picHost}}/address.png'></image></view>
+    
     <input name='tel' placeholder='电话' data-info='user' data-detail='tel' bindinput='getInfo' value='{{user.tel}}'></input>
   </view>
+  <view class='icon' bindtap='getAddress'><image src='{{picHost}}/address.png'></image></view>
 </view>
 <view class='sendLine'></view>
 <view class='sendBox2'>
@@ -28,6 +29,7 @@
 <view class='sendBox3'>
   <input placeholder='寄件人详细地址' data-info='area' bindinput='getInfo' value='{{region.detailInfo}}'></input>
 </view>
+<view class='sendLine'></view>
 
 
 <view class="sendBtn {{user.flag?'on':''}}" bindtap='saveInfo'>保存</view>
