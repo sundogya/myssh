@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/express/package",
-    "pages/express/address"
+    "pages/express/address",
+    "pages/test",
+    "pages/express/addressList"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -6,11 +6,8 @@ var goodsInfo = [{GoodsName:''}];
 var goods = [1]
 var data = {};
 var send = {
-  flag: {
-    province: 0,
-    city: 0,
-    area: 0
-  },
+  addId:'',
+  flag:0,
   info:{
     name:'',
     mobile:''
@@ -22,6 +19,7 @@ var send = {
   cityCode: {
     province: '',
     city: '',
+    area:''
   },
   city: {
     province: '请选择省',
@@ -29,25 +27,18 @@ var send = {
     area: '请选择区',
     detail: ''
   },
-  show: {
-    province: 0,
-    city: 0,
-    area: 0
-  }
 }
 var receive = {
-  flag: {
-    province: 0,
-    city: 0,
-    area: 0
-  },
+  addId:'',
+  flag: 0,
   info: {
     name: '',
     mobile: ''
   },
   cityCode: {
     province: '',
-    city: ''
+    city: '',
+    area:''
   },
   city: {
     province: '请选择省',
@@ -55,11 +46,6 @@ var receive = {
     area: '请选择区',
     detail:''
   },
-  show: {
-    province: 0,
-    city: 0,
-    area: 0
-  }
 }
 Page({
 
@@ -67,31 +53,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    city: {},
     sender: send,
     receiver: receive,
     comCodes:[],
-    goods:goods
+    goods:goods,
+    comFlag:0
   },
-  getInfo:function(e){
-    var dataNow = e.currentTarget.dataset
-    if (dataNow.role == 'send'){
-      if(dataNow.name == 'detail'){
-        send.city.detail = e.detail.value
-      }else if(dataNow.name == 'mobile'){
-        send.info.mobile = e.detail.value
-      }else if(dataNow.name == 'name'){
-        send.info.name = e.detail.value
-      }
-    }else if(dataNow.role == 'receive'){
-      if (dataNow.name == 'detail') {
-        receive.city.detail = e.detail.value
-      } else if (dataNow.name == 'mobile') {
-        receive.info.mobile = e.detail.value
-      } else if (dataNow.name == 'name') {
-        receive.info.name = e.detail.value
-      }
-    }
+  showCom:function(){
+    this.setData({
+      comFlag:1
+    })
+  },
+  addressList: function (e) {
+    wx.navigateTo({
+      url: '/pages/express/addressList?role=' + e.currentTarget.dataset.role,
+    })
   },
   fillGoods:function(e){
     var dataNow = e.currentTarget.dataset
@@ -106,18 +82,11 @@ Page({
       goodsInfo[dataNow.index].Goodsquantity = e.detail.value
     }
   },
-  hide:function(e){
-    e.show.city = 0
-    e.show.area = 0
-  },
-  getMoreCodes:function(){
-    pageNum = pageNum + 1
-    this.getComCodes()
-  },
   choseCom:function(e){
     send.comDetail = e.currentTarget.dataset
     this.setData({
-      sender:send
+      sender:send,
+      comFlag:0
     })
   },
   addGoods:function(){
@@ -128,85 +97,6 @@ Page({
     this.setData({
       goods:goods
     })
-  },
-  changeShow: function(e) {
-    var dataNow = e.currentTarget.dataset
-    if (dataNow.level != 'province' && dataNow.code) {
-      this.getCity(dataNow.level, dataNow.code)
-    }
-    if (dataNow.role == 'send') {
-      if (dataNow.level == 'province') {
-        send.show.province = 1
-        this.hide(receive)
-      } else if (dataNow.level == 'city') {
-        send.show.city = dataNow.code ? 1 : 0
-        this.hide(receive)
-      } else if (dataNow.level == 'area') {
-        send.show.area = dataNow.code ? 1 : 0
-        this.hide(receive)
-      }
-      this.setData({
-        sender: send,
-        receiver:receive
-      })
-    } else if (dataNow.role == 'receive') {
-      if (dataNow.level == 'province') {
-        receive.show.province = 1
-        this.hide(send)
-      } else if (dataNow.level == 'city') {
-        receive.show.city = dataNow.code ? 1 : 0
-        this.hide(send)
-      } else if (dataNow.level == 'area') {
-        receive.show.area = dataNow.code ? 1 : 0
-        this.hide(send)
-      }
-      this.setData({
-        sender:send,
-        receiver: receive
-      })
-    }
-  },
-  choseCity: function(e) {
-    var dataNow = e.currentTarget.dataset
-    if (dataNow.role == 'send') {
-      if (dataNow.level == 'province') {
-        send.cityCode.province = dataNow.city
-        send.city.province = dataNow.name
-        send.city.city = '请选择市'
-        send.city.area = '请选择区'
-        send.show.province = 0
-      } else if (dataNow.level == 'city') {
-        send.cityCode.city = dataNow.city
-        send.city.city = dataNow.name
-        send.city.area = '请选择区'
-        send.show.city = 0
-      } else if (dataNow.level == 'area') {
-        send.city.area = dataNow.name
-        send.show.area = 0
-      }
-      this.setData({
-        sender: send
-      })
-    } else if (dataNow.role == 'receive') {
-      if (dataNow.level == 'province') {
-        receive.cityCode.province = dataNow.city
-        receive.city.province = dataNow.name
-        receive.city.city = '请选择市'
-        receive.city.area = '请选择区'
-        receive.show.province = 0
-      } else if (dataNow.level == 'city') {
-        receive.cityCode.city = dataNow.city
-        receive.city.city = dataNow.name
-        receive.city.area = '请选择区'
-        receive.show.city = 0
-      } else if (dataNow.level == 'area') {
-        receive.city.area = dataNow.name
-        receive.show.area = 0
-      }
-      this.setData({
-        receiver: receive
-      })
-    }
   },
   getComCodes:function(){
     var postData = {}
@@ -229,42 +119,10 @@ Page({
       }
     })
   },
-  getCity: function(level, e = false) {
-    var postData = {};
-    if (e) {
-      postData.city = e
-    }
-    wx.request({
-      url: config.server+'/api/getCity',
-      data: postData,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      success: res => {
-        if (level == 'province') {
-          data.province = []
-          data.province = res.data.body.city
-          this.setData({
-            city: data
-          })
-        } else if (level == 'city') {
-          data.city = []
-          data.city = res.data.body.city
-          this.setData({
-            city: data
-          })
-        } else if (level == 'area') {
-          data.area = []
-          data.area = res.data.body.city
-          this.setData({
-            city: data
-          })
-        }
-      }
-    })
+  getMoreCodes: function () {
+    pageNum = pageNum + 1
+    this.getComCodes()
   },
-
   expressSubmit:function(){
     var postData = {}
     var pattern = /^1[3456789]\d{9}$/
@@ -281,6 +139,7 @@ Page({
       postData.sender.cityName = send.city.city
       postData.sender.cityCode = send.cityCode.city
       postData.sender.expAreaName = send.city.area
+      postData.sender.addId = send.addId
     }else{
       flag = 0
       wx.showModal({
@@ -313,6 +172,7 @@ Page({
         postData.receiver.cityName = receive.city.city
         postData.receiver.cityCode = receive.cityCode.city
         postData.receiver.expAreaName = receive.city.area
+        postData.receiver.addId = receive.addId
       }else{
         flag = 0
         wx.showModal({
@@ -378,12 +238,16 @@ Page({
     }
 
   },
-
+  toFillAddress:function(e){
+    var nowInfo = e.currentTarget.dataset
+    wx.navigateTo({
+      url: '/pages/express/address?role='+nowInfo.role+'&addId='+nowInfo.addId
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getCity('province');
     this.getComCodes();
   },
 
@@ -398,7 +262,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var addressData = {}
+    var bakAddress = this.data.mydata
+    if (this.data.mydata){
+      addressData = this.data.mydata.sor == 1 ? send:receive
 
+      addressData.flag = 1
+      addressData.addId = bakAddress.addId
+      addressData.city.province = bakAddress.provinceName
+      addressData.city.city = bakAddress.cityName
+      addressData.city.area = bakAddress.expAreaName
+      addressData.city.detail = bakAddress.areaDetail
+      addressData.cityCode.province = bakAddress.provinceCode
+      addressData.cityCode.city = bakAddress.cityCode
+      addressData.cityCode.area = bakAddress.areaCode
+      addressData.info.name = bakAddress.name
+      addressData.info.mobile = bakAddress.mobile
+      
+      this.setData({
+        sender:send,
+        receiver:receive
+      })
+    }
   },
 
   /**

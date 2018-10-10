@@ -4,16 +4,101 @@ view {
   display: flex;
   box-sizing: border-box;
 }
+.comChose{
+  width:100%;
+  height:80rpx;
+  align-items: cednter;
+  border-top:1rpx solid #ddd;
+  border-bottom:1rpx solid #ddd;
+  position:relative;
+}
+
+.comChose .desc,.comCode{
+  width:50%;
+  font-size:28rpx;
+  align-items: center;
+  padding:0 30rpx;
+  justify-content: flex-start;
+}
+
+.comCode{
+  justify-content: flex-end;
+  color:#dc1e32;
+}
 
 .comCodes {
-  width: 300rpx;
+  width:200rpx;
   height: 240rpx;
+  font-size:30rpx;
+  line-height:60rpx;
+  position:absolute;
+  background:#777;
+  color:white;
+  top:78rpx;
+  right:0;
 }
 
 .container {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
+
+.no-border {
+  border: none;
+}
+
+.sender,.receiver{
+  width:100%;
+  align-items:center;
+  padding:20rpx 0;
+  border-bottom:1rpx solid #ddd;
+}
+.role{
+  width:15%;
+  align-items: center;
+  justify-content: center;
+}
+.role text{
+  display:flex;
+  width:60rpx;
+  height:60rpx;
+  border-radius:50%;
+  color:white;
+  font-size:30rpx;
+  background:#333;
+  justify-content: center;
+  align-items: center;
+}
+.role .red{
+  background:#dc1e32;
+}
+.addressInfo,.noAddress{
+  width:60%;
+  height:140rpx;
+  font-size:26rpx;
+  color:#777;
+  border-right:1rpx solid #ddd;
+  padding:0 6rpx;
+}
+
+.addressInfo .info{
+  font-size:32rpx;
+  color:#333;
+}
+
+.addressList{
+  width:25%;
+  justify-content: center;
+  font-size:32rpx;
+}
+.quarter {
+  width: 187.5rpx;
+  display: flex;
+  font-size: 28rpx;
+  justify-content: center;
+  align-items: center;
+  border: none;
 }
 
 input {
@@ -27,49 +112,8 @@ input {
   border-right: 1rpx solid #bbb;
 }
 
-.no-border {
-  border: none;
-}
-
-.detail {
-  width: 750rpx;
-}
-
-.quarter {
-  width: 187.5rpx;
-  display: flex;
-  font-size: 28rpx;
-  justify-content: center;
-  align-items: center;
-  border: none;
-}
-
 .quarter input {
   border: none;
-}
-
-.cityOut {
-  width: 100%;
-  height: 72rpx;
-  position: relative;
-}
-
-.cityOut .selected {
-  width: 200rpx;
-  margin: 0 25rpx;
-  height: 72rpx;
-  font-size: 28rpx;
-  justify-content: center;
-  align-items: center;
-  border: 1rpx solid #999;
-}
-
-.send {
-  position: absolute;
-  z-index: 999;
-  top: 92rpx;
-  width: 100%;
-  background: rgba(192, 192, 192, 0.8);
 }
 
 .select {
@@ -89,6 +133,11 @@ input {
   width: 100%;
 }
 
+.express{
+  position:fixed;
+  bottom:80rpx;
+}
+
 .submit {
   display: flex;
   width: 250rpx;
@@ -97,4 +146,8 @@ input {
   justify-content: center;
   border: 0.5px solid #ddd;
   padding: 10rpx 0;
+}
+
+.hidden{
+  display:none;
 }

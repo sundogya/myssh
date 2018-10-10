@@ -11,11 +11,18 @@ var user = {
   flag: 0
 }
 var config = getApp().config;
+var addId = ''
 Page({
   data: {
     region: city,
     user: user,
     picHost: config.picHost
+  },
+  onShow:function(){
+    this.setData({
+      region: city,
+      user: user,
+    })
   },
   onLoad: function (options) {
     role = options.role ? options.role : 'receiver'
@@ -28,7 +35,6 @@ Page({
         city.city[2] = res.countyName
         city.cityCode.push(res.nationalCode.substring(0, 2) + '0000', res.nationalCode.substring(0, 4) + '00', res.nationalCode)
         city.detailInfo = res.detailInfo
-        console.log(city)
         user.tel = res.telNumber
         user.name = res.userName
         user.flag = 1
@@ -40,7 +46,6 @@ Page({
     })
   },
   bindRegionChange: function (e) {
-    console.log(e.detail)
     var val = e.detail.value
     if (val[0] == '全部' || val[1] == '全部' || val[2] == '全部') {
       var err = val[2] == '全部' ? '区县' : ''
@@ -134,18 +139,34 @@ Page({
         dataType: 'json',
         responseType: 'text',
         success: res => {
-          console.log(res.data)
+          city = {
+            cityCode: [],
+            city: [],
+            detailInfo: '',
+            customItem: '全部'
+          }
+          user = {
+            tel: '',
+            name: '',
+            flag: 0
+          }
+          addId = !res.data.errorCode?res.data.body.address_id:''
+          postData.addId = addId
+          var pages = getCurrentPages();             //  获取页面栈
+          var currPage = pages[pages.length - 1];    // 当前页面
+          var prevPage = pages[pages.length - 2];
+          var that = this;  // 上一个页面
+          prevPage.setData({
+            mydata: postData,
+          })
+          wx.navigateBack({
+            delta: 1,
+          })
         }
       })
     }
   }
 })
-
-
-
-
-
-
 
 
 

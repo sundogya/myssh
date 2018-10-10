@@ -2,10 +2,10 @@
 <view class='container'>
   <view class='comChose'>
     <view class='desc'>请选择物流公司</view>
-    <view class='comCode'>
-      <view class='selected'>{{sender.comDetail.name}}</view>
+    <view class='comCode' bindtap='showCom'>
+      <view class='selected' >{{sender.comDetail.name}}</view>
     </view>
-    <view class='comCodes'>
+    <view class='comCodes {{comFlag?"":"hidden"}}'>
       <scroll-view scroll-y class='code_scroll' bindscrolltolower='getMoreCodes'>
         <block wx:for='{{comCodes}}' wx:for-item='codes' wx:key='key'>
           <block wx:for='{{codes}}' wx:for-item='com' wx:key='key'>
@@ -16,79 +16,34 @@
     </view>
   </view>
   <view class='sender'>
-    <input placeholder='寄件人姓名' bindinput='getInfo' data-role='send' data-name='name'></input>
-    <input placeholder='寄件人联系电话' class='no-border' bindinput='getInfo' data-role='send' data-name='mobile'></input>
-    <view class='cityOut sender'>
-      <view class='selected' bindtap='changeShow' data-level='province' data-role='send'>{{sender.city.province}}</view>
-      <view class='selected' bindtap='changeShow' data-level='city' data-role='send' data-code='{{sender.cityCode.province}}'>{{sender.city.city}}</view>
-      <view class='selected' bindtap='changeShow' data-level='area' data-role='send' data-code='{{sender.cityCode.city}}'>{{sender.city.area}}</view>
-      <view class='province send'>
-        <block wx:if='{{sender.show.province}}'>
-          <view class='select'>
-            <block wx:for='{{city.province}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='province' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
-      <view class='city send'>
-        <block wx:if='{{sender.show.city}}'>
-          <view class='select'>
-            <block wx:for='{{city.city}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='city' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
-      <view class='area send'>
-
-        <block wx:if='{{sender.show.area}}'>
-          <view class='select'>
-            <block wx:for='{{city.area}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='area' data-role='send' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
+    <view class='role'>
+      <text>寄</text>
     </view>
-    <input placeholder='寄件人详细地址' class='no-border detail'  data-role='send' data-name='detail' bindinput='getInfo'></input>
+    <block wx:if='{{sender.flag}}'>
+      <view class='addressInfo' bindtap='toFillAddress' data-role='sender'>
+        <view class='info'>{{sender.info.name}} {{sender.info.mobile}}</view>
+        <view class='address'>{{sender.city.province}}{{sender.city.city}}{{sender.city.area}}{{sender.city.detail}}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class='noAddress' bindtap='toFillAddress' data-role='sender'>请填写完整的联系人信息，方便我们联系到您</view>
+    </block>
+    <view class='addressList' bindtap='addressList' data-role='sender'>地址簿</view>
   </view>
   <view class='receiver'>
-    <input placeholder='收件人姓名' data-role='receive' data-name='name' bindinput='getInfo'></input>
-    <input placeholder='收件人联系电话' class='no-border' data-role='receive' data-name='mobile' bindinput='getInfo'></input>
-    <view class='cityOut receiver'>
-      <view class='selected' bindtap='changeShow' data-level='province' data-role='receive'>{{receiver.city.province}}</view>
-      <view class='selected' bindtap='changeShow' data-level='city' data-role='receive' data-code='{{receiver.cityCode.province}}'>{{receiver.city.city}}</view>
-      <view class='selected' bindtap='changeShow' data-level='area' data-role='receive' data-code='{{receiver.cityCode.city}}'>{{receiver.city.area}}</view>
-      <view class='province send'>
-        <block wx:if='{{receiver.show.province}}'>
-          <view class='select'>
-            <block wx:for='{{city.province}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='province' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
-      <view class='city send'>
-        <block wx:if='{{receiver.show.city}}'>
-          <view class='select'>
-            <block wx:for='{{city.city}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='city' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
-      <view class='area send'>
-        <block wx:if='{{receiver.show.area}}'>
-          <view class='select'>
-            <block wx:for='{{city.area}}' wx:key='key'>
-              <view data-city='{{item.adcode}}' bindtap='choseCity' data-level='area' data-role='receive' data-name='{{item.name}}'>{{item.name}}</view>
-            </block>
-          </view>
-        </block>
-      </view>
+    <view class='role'>
+      <text class='red'>收</text>
     </view>
-    <input placeholder='收件人详细地址' class='no-border detail' data-role='receive' data-name='detail' bindinput='getInfo'></input>
+    <block wx:if='{{receiver.flag}}'>
+      <view class='addressInfo' bindtap='toFillAddress' data-role='receiver'>
+        <view class='info'>{{receiver.info.name}} {{receiver.info.mobile}}</view>
+        <view class='address'>{{receiver.city.province}}{{receiver.city.city}}{{receiver.city.area}}{{receiver.city.detail}}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class='noAddress' bindtap='toFillAddress' data-role='receiver'>请填写完整的收货方信息，方便我们联系</view>
+    </block>
+    <view class='addressList' bindtap='addressList' data-role='receiver'>地址簿</view>
   </view>
   <view class='attach'>
     <block wx:for='{{goods}}' wx:for-index='indx' wx:key='key' wx:for-item='item'>
