@@ -58,7 +58,7 @@ Page({
         mask: true,
       })
     } else {
-      city.cityCode = e.detail.cityCode
+      city.cityCode = e.detail.code
       city.city = val
       city.detailInfo = ''
       user.flag =
@@ -87,8 +87,9 @@ Page({
           responseType: 'text',
           success: res => {
             user.flag = user.name && user.tel ? 1 : 0
+            console.log(res.data)
             city.city = res.data.body.city
-            city.cityCode = res.data.body.cityCode
+            city.cityCode = res.data.body.code
             this.setData({
               region: city,
               user: user
@@ -129,6 +130,7 @@ Page({
       postData.cityCode = city.cityCode[1]
       postData.areaCode = city.cityCode[2]
       postData.uid = wx.getStorageSync('openId')
+      
       wx.request({
         url: config.server + '/api/saveUserCityInfo',
         data: postData,
