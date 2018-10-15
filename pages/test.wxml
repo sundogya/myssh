@@ -1,2 +1,0 @@
-<!--pages/test.wxml-->
-<view bindtap='getAddress'>寄件地址</view>
