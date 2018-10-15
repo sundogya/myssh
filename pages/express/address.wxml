@@ -13,7 +13,7 @@
 
 <view class='icon' bindtap='openLoc'><image src='{{picHost}}/loc.png'></image></view>
   <view class="section">
-    <picker mode="region" bindchange="bindRegionChange" style='width:750rpx;' value="{{region}}" custom-item="{{region.customItem}}">
+    <picker mode="region" bindchange="bindRegionChange" style='width:750rpx;' value="{{region.detailInfo}}" custom-item="{{region.customItem}}">
       <view class="picker">
         <block wx:if="{{region.city.length}}">
           {{region.city[0]}} {{region.city[1]}} {{region.city[2]}}

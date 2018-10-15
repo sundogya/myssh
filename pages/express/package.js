@@ -241,7 +241,7 @@ Page({
   toFillAddress:function(e){
     var nowInfo = e.currentTarget.dataset
     wx.navigateTo({
-      url: '/pages/express/address?role='+nowInfo.role+'&addId='+nowInfo.addId
+      url: '/pages/express/address?role='+nowInfo.role+'&addId='+nowInfo.addid
     })
   },
   /**

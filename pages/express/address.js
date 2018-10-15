@@ -26,13 +26,35 @@ Page({
   },
   onLoad: function (options) {
     role = options.role ? options.role : 'receiver'
+    if (options.addId) {
+      wx.request({
+        url: config.server + '/api/getUserCityInfo',
+        data: { uid: wx.getStorageSync('openId'), addId: options.addId },
+        header: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        dataType: 'json',
+        success: res => {
+          city.city=res.data.body.city
+          city.cityCode = res.data.body.code
+          city.detailInfo = res.data.body.detailInfo
+          user.name = res.data.body.name
+          user.tel = res.data.body.tel
+          user.flag = 1
+          this.setData({
+            region:city,
+            user:user
+          })
+        } 
+      })
+    }
   },
   getAddress: function () {
     wx.chooseAddress({
       success: res => {
-        city.city[0] = res.provinceName
-        city.city[1] = res.cityName
-        city.city[2] = res.countyName
+        console.log(res)
+        city.city=[]
+        city.cityCode=[]
+        city.city.push(res.provinceName, res.cityName, res.countyName)
         city.cityCode.push(res.nationalCode.substring(0, 2) + '0000', res.nationalCode.substring(0, 4) + '00', res.nationalCode)
         city.detailInfo = res.detailInfo
         user.tel = res.telNumber

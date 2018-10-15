@@ -1,2 +1,20 @@
 <!--pages/express/addressList.wxml-->
-<text>正在开发，敬请期待</text>
+<view class='container'>
+  <view class='addList'>
+    <block wx:for='{{addList}}' wx:for-index='index' wx:for-item='list' wx:key='keyout'>
+      <block wx:for='{{list}}' wx:for-item='item' wx:for-index='indx' wx:key='keyin'>
+        <view class='item'>
+          <view class='info' data-index='{{index}}' data-indx='{{indx}}' data-addid='{{item.addId}}' bindtap='choseAdd'>
+            <view class='user'>{{item.name}} {{item.tel}}</view>
+            <view class='address'>{{item.city[0]}}{{item.city[1]}}{{item.city[2]}}{{item.detailInfo}}</view>
+          </view>
+          <view class='options'>
+            <view class='defaultAdd'><image src='{{picHost}}/chose_no.png'></image>设置为默认</view>
+            <view class='modify'><image src='{{picHost}}/edit.png'></image>编辑</view>
+            <view class='delAdd'><image src='{{picHost}}/del.png'></image>删除</view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+</view>

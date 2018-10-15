@@ -20,7 +20,7 @@
       <text>寄</text>
     </view>
     <block wx:if='{{sender.flag}}'>
-      <view class='addressInfo' bindtap='toFillAddress' data-role='sender'>
+      <view class='addressInfo' bindtap='toFillAddress' data-role='sender' data-addid='{{sender.addId}}'>
         <view class='info'>{{sender.info.name}} {{sender.info.mobile}}</view>
         <view class='address'>{{sender.city.province}}{{sender.city.city}}{{sender.city.area}}{{sender.city.detail}}</view>
       </view>
@@ -35,7 +35,7 @@
       <text class='red'>收</text>
     </view>
     <block wx:if='{{receiver.flag}}'>
-      <view class='addressInfo' bindtap='toFillAddress' data-role='receiver'>
+      <view class='addressInfo' bindtap='toFillAddress' data-role='receiver'  data-addid='{{receiver.addId}}'>
         <view class='info'>{{receiver.info.name}} {{receiver.info.mobile}}</view>
         <view class='address'>{{receiver.city.province}}{{receiver.city.city}}{{receiver.city.area}}{{receiver.city.detail}}</view>
       </view>

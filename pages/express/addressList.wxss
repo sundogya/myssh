@@ -1,1 +1,51 @@
 /* pages/express/addressList.wxss */
+.item{
+  width:100%;
+  justify-content: center;
+  border-top:1rpx solid #ddd;
+  padding:0 20rpx;
+  border-bottom:10rpx solid #ddd;
+  padding-bottom:10rpx;
+}
+.info{
+  width:98%;
+  border-bottom:1rpx solid #ddd;
+  padding:20rpx 0;
+}
+.info .user{
+  font-size:36rpx;
+  color:#333;
+  justify-content: flex-start;
+  padding:10rpx 0; 
+}
+.info .address{
+  font-size:28rpx;
+  line-height:48rpx;
+  color:#555;
+}
+.options{
+  width:100%;
+  font-size:26rpx;
+  color:#777;
+}
+.options .defaultAdd,.options .modify,.options .delAdd{
+  width:50%;
+  height:80rpx;
+  align-items: center;
+  justify-content: flex-start;
+}
+.options .modify,.options .delAdd{
+  width:25%;
+  justify-content: flex-end;
+  padding-right:10rpx;
+}
+.options .defaultAdd image,.options .modify image,.options .delAdd image{
+  width:40rpx;
+  height:40rpx;
+  margin:0 10rpx;
+  display:inline-flex;
+}
+.options .modify image,.options .delAdd image{
+  width:32rpx;
+  height:32rpx;
+}
